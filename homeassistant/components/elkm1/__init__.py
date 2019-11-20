@@ -13,7 +13,7 @@ from homeassistant.const import (
     CONF_PASSWORD,
     CONF_TEMPERATURE_UNIT,
     CONF_USERNAME,
-    CONF_CODE,
+    CONF_DISARM_CODE,
 )
 from homeassistant.core import HomeAssistant, callback  # noqa
 from homeassistant.helpers import config_validation as cv, discovery
@@ -106,7 +106,7 @@ DEVICE_SCHEMA = vol.Schema(
         vol.Optional(CONF_PREFIX, default=""): vol.All(cv.string, vol.Lower),
         vol.Optional(CONF_USERNAME, default=""): cv.string,
         vol.Optional(CONF_PASSWORD, default=""): cv.string,
-        vol.Optional(CONF_CODE, default=""): cv.string,
+        vol.Optional(CONF_DISARM_CODE, default=""): cv.string,
         vol.Optional(CONF_TEMPERATURE_UNIT, default="F"): cv.temperature_unit,
         vol.Optional(CONF_AREA, default={}): DEVICE_SCHEMA_SUBDOMAIN,
         vol.Optional(CONF_COUNTER, default={}): DEVICE_SCHEMA_SUBDOMAIN,
@@ -155,7 +155,7 @@ async def async_setup(hass: HomeAssistant, hass_config: ConfigType) -> bool:
 
         config = {"temperature_unit": conf[CONF_TEMPERATURE_UNIT]}
         config["panel"] = {"enabled": True, "included": [True]}
-        config["code"] = conf[CONF_CODE]
+        config["disarm_code"] = conf[CONF_DISARM_CODE]
 
         for item, max_ in configs.items():
             config[item] = {
@@ -243,7 +243,7 @@ class ElkEntity(Entity):
         self._element = element
         self._prefix = elk_data["prefix"]
         self._temperature_unit = elk_data["config"]["temperature_unit"]
-        self._code = elk_data["config"]["code"]
+        self._disarm_code = elk_data["config"]["disarm_code"]
         # unique_id starts with elkm1_ iff there is no prefix
         # it starts with elkm1m_{prefix} iff there is a prefix
         # this is to avoid a conflict between

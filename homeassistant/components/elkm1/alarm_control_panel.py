@@ -4,7 +4,7 @@ import voluptuous as vol
 
 import homeassistant.components.alarm_control_panel as alarm
 from homeassistant.const import (
-    ATTR_CODE,
+    ATTR_DISARM_CODE,
     ATTR_ENTITY_ID,
     STATE_ALARM_ARMED_AWAY,
     STATE_ALARM_ARMED_HOME,
@@ -28,7 +28,7 @@ SIGNAL_DISPLAY_MESSAGE = "elkm1_display_message"
 ELK_ALARM_SERVICE_SCHEMA = vol.Schema(
     {
         vol.Required(ATTR_ENTITY_ID, default=[]): cv.entity_ids,
-        vol.Required(ATTR_CODE): vol.All(vol.Coerce(int), vol.Range(0, 999999)),
+        vol.Required(ATTR_DISARM_CODE): vol.All(vol.Coerce(int), vol.Range(0, 999999)),
     }
 )
 
@@ -65,7 +65,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     def _arm_service(service):
         entity_ids = service.data.get(ATTR_ENTITY_ID, [])
         arm_level = _arm_services().get(service.service)
-        args = (arm_level, service.data.get(ATTR_CODE))
+        args = (arm_level, service.data.get(ATTR_DISARM_CODE))
         _dispatch(SIGNAL_ARM_ENTITY, entity_ids, *args)
 
     for service in _arm_services():
@@ -158,7 +158,7 @@ class ElkArea(ElkEntity, alarm.AlarmControlPanel):
         if elmt.alarm_state is not None:
             attrs["alarm_state"] = AlarmState(elmt.alarm_state).name.lower()
         attrs["changed_by_entity_id"] = self._changed_by_entity_id
-        if self._code != "":
+        if self._disarm_code != "":
             attrs["code_arm_required"] = False
         return attrs
 
@@ -197,24 +197,24 @@ class ElkArea(ElkEntity, alarm.AlarmControlPanel):
     async def async_alarm_arm_home(self, code=None):
         """Send arm home command."""
         if code is None:
-            code = self._code
+            code = self._disarm_code
         self._element.arm(ArmLevel.ARMED_STAY.value, int(code))
 
     async def async_alarm_arm_away(self, code=None):
         """Send arm away command."""
         if code is None:
-            code = self._code
+            code = self._disarm_code
         self._element.arm(ArmLevel.ARMED_AWAY.value, int(code))
 
     async def async_alarm_arm_night(self, code=None):
         """Send arm night command."""
         if code is None:
-            code = self._code
+            code = self.__disarm_code
         self._element.arm(ArmLevel.ARMED_NIGHT.value, int(code))
 
     async def _arm_service(self, arm_level, code):
         if code is None:
-            code = self._code
+            code = self._disarm_code
         self._element.arm(arm_level, code)
 
     async def _display_message(self, clear, beep, timeout, line1, line2):

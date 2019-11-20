@@ -61,6 +61,7 @@ CONF_DEVICE_CLASS = "device_class"
 CONF_DEVICE_ID = "device_id"
 CONF_DEVICES = "devices"
 CONF_DISARM_AFTER_TRIGGER = "disarm_after_trigger"
+CONF_DISARM_CODE = "disarm_code"
 CONF_DISCOVERY = "discovery"
 CONF_DISKS = "disks"
 CONF_DISPLAY_CURRENCY = "display_currency"
@@ -280,6 +281,7 @@ ATTR_WAKEUP = "wake_up_interval"
 
 # For devices which support a code attribute
 ATTR_CODE = "code"
+ATTR_DISARM_CODE = "disarm_code"
 ATTR_CODE_FORMAT = "code_format"
 
 # For calling a device specific command
