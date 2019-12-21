@@ -3,7 +3,11 @@
   "name": "Plant",
   "documentation": "https://www.home-assistant.io/integrations/plant",
   "requirements": [],
-  "dependencies": ["group", "zone"],
-  "after_dependencies": ["recorder"],
-  "codeowners": ["@ChristianKuehnel"]
+  "dependencies": [
+    "group",
+    "zone"
+  ],
+  "codeowners": [
+    "@ChristianKuehnel"
+  ]
 }

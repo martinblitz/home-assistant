@@ -3,18 +3,17 @@
 from datetime import datetime, timedelta
 import unittest
 from unittest.mock import patch
-
 import pytest
 import pytz
 
-from homeassistant.components.history_stats.sensor import HistoryStatsSensor
 from homeassistant.const import STATE_UNKNOWN
+from homeassistant.setup import setup_component
+from homeassistant.components.history_stats.sensor import HistoryStatsSensor
 import homeassistant.core as ha
 from homeassistant.helpers.template import Template
-from homeassistant.setup import setup_component
 import homeassistant.util.dt as dt_util
 
-from tests.common import get_test_home_assistant, init_recorder_component
+from tests.common import init_recorder_component, get_test_home_assistant
 
 
 class TestHistoryStatsSensor(unittest.TestCase):

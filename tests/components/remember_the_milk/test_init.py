@@ -1,9 +1,9 @@
 """Tests for the Remember The Milk component."""
 
-import json
 import logging
+import json
 import unittest
-from unittest.mock import Mock, mock_open, patch
+from unittest.mock import patch, mock_open, Mock
 
 import homeassistant.components.remember_the_milk as rtm
 

@@ -1,8 +1,6 @@
 """Support for the Roku media player."""
 import logging
-
 import requests.exceptions
-from roku import Roku
 
 from homeassistant.components.media_player import MediaPlayerDevice
 from homeassistant.components.media_player.const import (
@@ -12,10 +10,10 @@ from homeassistant.components.media_player.const import (
     SUPPORT_PLAY_MEDIA,
     SUPPORT_PREVIOUS_TRACK,
     SUPPORT_SELECT_SOURCE,
-    SUPPORT_TURN_OFF,
-    SUPPORT_TURN_ON,
     SUPPORT_VOLUME_MUTE,
     SUPPORT_VOLUME_SET,
+    SUPPORT_TURN_ON,
+    SUPPORT_TURN_OFF,
 )
 from homeassistant.const import (
     CONF_HOST,
@@ -56,6 +54,7 @@ class RokuDevice(MediaPlayerDevice):
 
     def __init__(self, host):
         """Initialize the Roku device."""
+        from roku import Roku
 
         self.roku = Roku(host)
         self.ip_address = host
@@ -175,7 +174,7 @@ class RokuDevice(MediaPlayerDevice):
 
     def turn_on(self):
         """Turn on the Roku."""
-        self.roku.poweron()
+        self.roku.power()
 
     def turn_off(self):
         """Turn off the Roku."""

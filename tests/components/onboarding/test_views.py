@@ -4,18 +4,18 @@ from unittest.mock import patch
 
 import pytest
 
+from homeassistant.setup import async_setup_component
 from homeassistant.components import onboarding
 from homeassistant.components.onboarding import const, views
-from homeassistant.setup import async_setup_component
+
+from tests.common import CLIENT_ID, register_auth_provider
+from tests.components.met.conftest import mock_weather  # noqa
 
 from . import mock_storage
 
-from tests.common import CLIENT_ID, register_auth_provider
-from tests.components.met.conftest import mock_weather  # noqa: F401
-
 
 @pytest.fixture(autouse=True)
-def always_mock_weather(mock_weather):  # noqa: F811
+def always_mock_weather(mock_weather):  # noqa
     """Mock the Met weather provider."""
     pass
 

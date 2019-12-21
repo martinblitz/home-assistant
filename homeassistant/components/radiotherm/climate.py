@@ -1,32 +1,32 @@
 """Support for Radio Thermostat wifi-enabled home thermostats."""
 import logging
 
-import radiotherm
 import voluptuous as vol
+import radiotherm
 
-from homeassistant.components.climate import PLATFORM_SCHEMA, ClimateDevice
+from homeassistant.components.climate import ClimateDevice, PLATFORM_SCHEMA
 from homeassistant.components.climate.const import (
-    CURRENT_HVAC_COOL,
-    CURRENT_HVAC_HEAT,
-    CURRENT_HVAC_IDLE,
-    FAN_OFF,
-    FAN_ON,
     HVAC_MODE_AUTO,
     HVAC_MODE_COOL,
     HVAC_MODE_HEAT,
     HVAC_MODE_OFF,
-    SUPPORT_FAN_MODE,
+    FAN_ON,
+    FAN_OFF,
+    CURRENT_HVAC_IDLE,
+    CURRENT_HVAC_HEAT,
+    CURRENT_HVAC_COOL,
     SUPPORT_TARGET_TEMPERATURE,
+    SUPPORT_FAN_MODE,
 )
 from homeassistant.const import (
     ATTR_TEMPERATURE,
     CONF_HOST,
     PRECISION_HALVES,
-    STATE_ON,
     TEMP_FAHRENHEIT,
+    STATE_ON,
 )
-import homeassistant.helpers.config_validation as cv
 from homeassistant.util import dt as dt_util
+import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 

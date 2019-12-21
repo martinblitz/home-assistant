@@ -2,11 +2,11 @@
 import asyncio
 from unittest.mock import patch
 
-from homeassistant.components import config
 from homeassistant.const import EVENT_COMPONENT_LOADED
-from homeassistant.setup import ATTR_COMPONENT, async_setup_component
+from homeassistant.setup import async_setup_component, ATTR_COMPONENT
+from homeassistant.components import config
 
-from tests.common import mock_component, mock_coro
+from tests.common import mock_coro, mock_component
 
 
 @asyncio.coroutine

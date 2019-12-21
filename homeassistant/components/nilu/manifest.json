@@ -6,7 +6,5 @@
     "niluclient==0.1.2"
   ],
   "dependencies": [],
-  "codeowners": [
-    "@hfurubotten"
-  ]
+  "codeowners": []
 }

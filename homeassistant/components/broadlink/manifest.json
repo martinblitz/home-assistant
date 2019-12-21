@@ -7,7 +7,6 @@
   ],
   "dependencies": [],
   "codeowners": [
-    "@danielhiversen",
-    "@felipediel"
+    "@danielhiversen"
   ]
 }

@@ -5,11 +5,13 @@ There are two different types of discoveries that can be fired/listened for.
  - listen_platform/discover_platform is for platforms. These are used by
    components to allow discovery of their platforms.
 """
-from homeassistant import core, setup
+from homeassistant import setup, core
+from homeassistant.loader import bind_hass
 from homeassistant.const import ATTR_DISCOVERED, ATTR_SERVICE, EVENT_PLATFORM_DISCOVERED
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.loader import DEPENDENCY_BLACKLIST, bind_hass
+from homeassistant.loader import DEPENDENCY_BLACKLIST
 from homeassistant.util.async_ import run_callback_threadsafe
+
 
 # mypy: allow-untyped-defs, no-check-untyped-defs
 

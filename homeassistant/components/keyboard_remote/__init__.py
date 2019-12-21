@@ -1,14 +1,13 @@
 """Receive signals from a keyboard and use it as a remote control."""
 # pylint: disable=import-error
-import asyncio
 import logging
+import asyncio
 
-import aionotify
 from evdev import InputDevice, categorize, ecodes, list_devices
+import aionotify
 import voluptuous as vol
-
-from homeassistant.const import EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP
 import homeassistant.helpers.config_validation as cv
+from homeassistant.const import EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP
 
 _LOGGER = logging.getLogger(__name__)
 

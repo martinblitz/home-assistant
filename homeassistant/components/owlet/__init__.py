@@ -1,7 +1,6 @@
 """Support for Owlet baby monitors."""
 import logging
 
-from pyowlet.PyOwlet import PyOwlet
 import voluptuous as vol
 
 from homeassistant.const import CONF_NAME, CONF_PASSWORD, CONF_USERNAME
@@ -42,6 +41,7 @@ CONFIG_SCHEMA = vol.Schema(
 
 def setup(hass, config):
     """Set up owlet component."""
+    from pyowlet.PyOwlet import PyOwlet
 
     username = config[DOMAIN][CONF_USERNAME]
     password = config[DOMAIN][CONF_PASSWORD]

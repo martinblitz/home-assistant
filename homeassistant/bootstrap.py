@@ -1,26 +1,22 @@
 """Provide methods to bootstrap a Home Assistant instance."""
 import asyncio
-from collections import OrderedDict
 import logging
 import logging.handlers
 import os
 import sys
 from time import time
-from typing import Any, Dict, Optional, Set
+from collections import OrderedDict
+from typing import Any, Optional, Dict, Set
 
 import voluptuous as vol
 
-from homeassistant import config as conf_util, config_entries, core, loader
-from homeassistant.const import (
-    EVENT_HOMEASSISTANT_CLOSE,
-    REQUIRED_NEXT_PYTHON_DATE,
-    REQUIRED_NEXT_PYTHON_VER,
-)
-from homeassistant.exceptions import HomeAssistantError
+from homeassistant import core, config as conf_util, config_entries, loader
+from homeassistant.const import EVENT_HOMEASSISTANT_CLOSE
 from homeassistant.setup import async_setup_component
 from homeassistant.util.logging import AsyncHandler
 from homeassistant.util.package import async_get_user_site, is_virtual_env
 from homeassistant.util.yaml import clear_secret_cache
+from homeassistant.exceptions import HomeAssistantError
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -99,14 +95,11 @@ async def async_from_config_dict(
     stop = time()
     _LOGGER.info("Home Assistant initialized in %.2fs", stop - start)
 
-    if REQUIRED_NEXT_PYTHON_DATE and sys.version_info[:3] < REQUIRED_NEXT_PYTHON_VER:
+    if sys.version_info[:3] < (3, 7, 0):
         msg = (
-            "Support for the running Python version "
-            f"{'.'.join(str(x) for x in sys.version_info[:3])} is deprecated and will "
-            f"be removed in the first release after {REQUIRED_NEXT_PYTHON_DATE}. "
-            "Please upgrade Python to "
-            f"{'.'.join(str(x) for x in REQUIRED_NEXT_PYTHON_VER)} or "
-            "higher."
+            "Python 3.6 support is deprecated and will "
+            "be removed in the first release after December 15, 2019. Please "
+            "upgrade Python to 3.7.0 or higher."
         )
         _LOGGER.warning(msg)
         hass.components.persistent_notification.async_create(

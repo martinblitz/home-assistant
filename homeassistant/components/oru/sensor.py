@@ -2,12 +2,14 @@
 from datetime import timedelta
 import logging
 
-from oru import Meter, MeterError
 import voluptuous as vol
 
+from oru import Meter
+from oru import MeterError
+
 from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.const import ENERGY_KILO_WATT_HOUR
 import homeassistant.helpers.config_validation as cv
+from homeassistant.const import ENERGY_KILO_WATT_HOUR
 from homeassistant.helpers.entity import Entity
 
 _LOGGER = logging.getLogger(__name__)

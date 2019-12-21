@@ -1,1 +1,1 @@
-"""The Alpha Vantage component."""
+"""The alpha_vantage component."""

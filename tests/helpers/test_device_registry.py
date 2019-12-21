@@ -7,8 +7,7 @@ import pytest
 
 from homeassistant.core import callback
 from homeassistant.helpers import device_registry
-
-from tests.common import flush_store, mock_device_registry
+from tests.common import mock_device_registry, flush_store
 
 
 @pytest.fixture

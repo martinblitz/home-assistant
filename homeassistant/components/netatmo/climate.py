@@ -1,34 +1,34 @@
 """Support for Netatmo Smart thermostats."""
 from datetime import timedelta
 import logging
-from typing import List, Optional
+from typing import Optional, List
 
 import pyatmo
 import requests
 import voluptuous as vol
 
-from homeassistant.components.climate import PLATFORM_SCHEMA, ClimateDevice
+import homeassistant.helpers.config_validation as cv
+from homeassistant.components.climate import ClimateDevice, PLATFORM_SCHEMA
 from homeassistant.components.climate.const import (
-    CURRENT_HVAC_HEAT,
-    CURRENT_HVAC_IDLE,
-    DEFAULT_MIN_TEMP,
     HVAC_MODE_AUTO,
     HVAC_MODE_HEAT,
     HVAC_MODE_OFF,
     PRESET_AWAY,
     PRESET_BOOST,
-    SUPPORT_PRESET_MODE,
+    CURRENT_HVAC_HEAT,
+    CURRENT_HVAC_IDLE,
     SUPPORT_TARGET_TEMPERATURE,
+    SUPPORT_PRESET_MODE,
+    DEFAULT_MIN_TEMP,
 )
 from homeassistant.const import (
-    ATTR_BATTERY_LEVEL,
+    TEMP_CELSIUS,
     ATTR_TEMPERATURE,
     CONF_NAME,
     PRECISION_HALVES,
     STATE_OFF,
-    TEMP_CELSIUS,
+    ATTR_BATTERY_LEVEL,
 )
-import homeassistant.helpers.config_validation as cv
 from homeassistant.util import Throttle
 
 from .const import DATA_NETATMO_AUTH

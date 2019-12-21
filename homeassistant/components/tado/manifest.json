@@ -6,7 +6,5 @@
     "python-tado==0.2.9"
   ],
   "dependencies": [],
-  "codeowners": [
-    "@michaelarnauts"
-  ]
+  "codeowners": []
 }

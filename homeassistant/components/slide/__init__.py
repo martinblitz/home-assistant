@@ -1,25 +1,24 @@
 """Component for the Go Slide API."""
 
-from datetime import timedelta
 import logging
+from datetime import timedelta
 
-from goslideapi import GoSlideCloud, goslideapi
 import voluptuous as vol
+from goslideapi import GoSlideCloud, goslideapi
 
 from homeassistant.const import (
+    CONF_USERNAME,
     CONF_PASSWORD,
     CONF_SCAN_INTERVAL,
-    CONF_USERNAME,
-    STATE_CLOSED,
-    STATE_CLOSING,
     STATE_OPEN,
+    STATE_CLOSED,
     STATE_OPENING,
+    STATE_CLOSING,
 )
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.discovery import async_load_platform
-from homeassistant.helpers.event import async_call_later, async_track_time_interval
-
-from .const import API, COMPONENT, DEFAULT_RETRY, DOMAIN, SLIDES
+from homeassistant.helpers.event import async_track_time_interval, async_call_later
+from .const import DOMAIN, SLIDES, API, COMPONENT, DEFAULT_RETRY
 
 _LOGGER = logging.getLogger(__name__)
 

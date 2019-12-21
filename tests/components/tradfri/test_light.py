@@ -1,7 +1,7 @@
 """Tradfri lights platform tests."""
 
 from copy import deepcopy
-from unittest.mock import MagicMock, Mock, PropertyMock, patch
+from unittest.mock import Mock, MagicMock, patch, PropertyMock
 
 import pytest
 from pytradfri.device import Device
@@ -11,6 +11,7 @@ from pytradfri.device.light_control import LightControl
 from homeassistant.components import tradfri
 
 from tests.common import MockConfigEntry
+
 
 DEFAULT_TEST_FEATURES = {
     "can_set_dimmer": False,

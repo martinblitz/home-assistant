@@ -2,7 +2,6 @@
 from datetime import timedelta
 import logging
 
-from swisshydrodata import SwissHydroData
 import voluptuous as vol
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA
@@ -168,6 +167,7 @@ class HydrologicalData:
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
     def update(self):
         """Get the latest data."""
+        from swisshydrodata import SwissHydroData
 
         shd = SwissHydroData()
         self.data = shd.get_station(self.station)

@@ -1,12 +1,11 @@
 """Support for Dyson Pure Cool Link devices."""
 import logging
 
-from libpurecool.dyson import DysonAccount
 import voluptuous as vol
 
+import homeassistant.helpers.config_validation as cv
 from homeassistant.const import CONF_DEVICES, CONF_PASSWORD, CONF_TIMEOUT, CONF_USERNAME
 from homeassistant.helpers import discovery
-import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,6 +42,8 @@ def setup(hass, config):
 
     if DYSON_DEVICES not in hass.data:
         hass.data[DYSON_DEVICES] = []
+
+    from libpurecool.dyson import DysonAccount
 
     dyson_account = DysonAccount(
         config[DOMAIN].get(CONF_USERNAME),

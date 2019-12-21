@@ -1,16 +1,15 @@
 """Support to control ecoal/esterownik.pl coal/wood boiler controller."""
 import logging
 
-from ecoaliface.simple import ECoalController
 import voluptuous as vol
 
 from homeassistant.const import (
     CONF_HOST,
-    CONF_MONITORED_CONDITIONS,
     CONF_PASSWORD,
+    CONF_USERNAME,
+    CONF_MONITORED_CONDITIONS,
     CONF_SENSORS,
     CONF_SWITCHES,
-    CONF_USERNAME,
 )
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.discovery import load_platform
@@ -81,6 +80,7 @@ CONFIG_SCHEMA = vol.Schema(
 
 def setup(hass, hass_config):
     """Set up global ECoalController instance same for sensors and switches."""
+    from ecoaliface.simple import ECoalController
 
     conf = hass_config[DOMAIN]
     host = conf[CONF_HOST]

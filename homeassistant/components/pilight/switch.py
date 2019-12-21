@@ -3,17 +3,17 @@ import logging
 
 import voluptuous as vol
 
+import homeassistant.helpers.config_validation as cv
 from homeassistant.components import pilight
-from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchDevice
+from homeassistant.components.switch import SwitchDevice, PLATFORM_SCHEMA
 from homeassistant.const import (
-    CONF_ID,
     CONF_NAME,
-    CONF_PROTOCOL,
-    CONF_STATE,
+    CONF_ID,
     CONF_SWITCHES,
+    CONF_STATE,
+    CONF_PROTOCOL,
     STATE_ON,
 )
-import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.restore_state import RestoreEntity
 
 _LOGGER = logging.getLogger(__name__)

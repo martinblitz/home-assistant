@@ -6,18 +6,17 @@ from unittest.mock import patch
 from homeassistant.components.filter.sensor import (
     LowPassFilter,
     OutlierFilter,
-    RangeFilter,
     ThrottleFilter,
     TimeSMAFilter,
+    RangeFilter,
     TimeThrottleFilter,
 )
-import homeassistant.core as ha
-from homeassistant.setup import setup_component
 import homeassistant.util.dt as dt_util
-
+from homeassistant.setup import setup_component
+import homeassistant.core as ha
 from tests.common import (
-    assert_setup_component,
     get_test_home_assistant,
+    assert_setup_component,
     init_recorder_component,
 )
 
@@ -28,7 +27,6 @@ class TestFilterSensor(unittest.TestCase):
     def setup_method(self, method):
         """Set up things to be run when tests are started."""
         self.hass = get_test_home_assistant()
-        self.hass.config.components.add("history")
         raw_values = [20, 19, 18, 21, 22, 0]
         self.values = []
 

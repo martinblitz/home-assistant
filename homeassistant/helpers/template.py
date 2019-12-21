@@ -1,12 +1,12 @@
 """Template helper methods for rendering strings with Home Assistant data."""
 import base64
-from datetime import datetime
-from functools import wraps
 import json
 import logging
 import math
 import random
 import re
+from datetime import datetime
+from functools import wraps
 from typing import Any, Dict, Iterable, List, Optional, Union
 
 import jinja2
@@ -29,6 +29,7 @@ from homeassistant.helpers.typing import HomeAssistantType, TemplateVarsType
 from homeassistant.loader import bind_hass
 from homeassistant.util import convert, dt as dt_util, location as loc_util
 from homeassistant.util.async_ import run_callback_threadsafe
+
 
 # mypy: allow-untyped-calls, allow-untyped-defs
 # mypy: no-check-untyped-defs, no-warn-return-any
@@ -68,9 +69,7 @@ def render_complex(value, variables=None):
         return [render_complex(item, variables) for item in value]
     if isinstance(value, dict):
         return {key: render_complex(item, variables) for key, item in value.items()}
-    if isinstance(value, Template):
-        return value.async_render(variables)
-    return value
+    return value.async_render(variables)
 
 
 def extract_entities(
@@ -143,7 +142,7 @@ class RenderInfo:
     def result(self) -> str:
         """Results of the template computation."""
         if self._exception is not None:
-            raise self._exception
+            raise self._exception  # pylint: disable=raising-bad-type
         return self._result
 
     def _freeze(self) -> None:
@@ -670,8 +669,6 @@ def forgiving_round(value, precision=0, method="common"):
             value = math.ceil(float(value) * multiplier) / multiplier
         elif method == "floor":
             value = math.floor(float(value) * multiplier) / multiplier
-        elif method == "half":
-            value = round(float(value) * 2) / 2
         else:
             # if method is common or something else, use common rounding
             value = round(float(value), precision)

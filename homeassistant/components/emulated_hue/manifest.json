@@ -6,7 +6,5 @@
     "aiohttp_cors==0.7.0"
   ],
   "dependencies": [],
-  "codeowners": [
-      "@NobleKangaroo"
-  ]
+  "codeowners": []
 }

@@ -1,16 +1,17 @@
 """The tests for the hassio component."""
 import asyncio
 import os
-from unittest.mock import Mock, patch
+from unittest.mock import patch, Mock
 
 import pytest
 
 from homeassistant.auth.const import GROUP_ID_ADMIN
-from homeassistant.components import frontend
-from homeassistant.components.hassio import STORAGE_KEY
 from homeassistant.setup import async_setup_component
+from homeassistant.components.hassio import STORAGE_KEY
+from homeassistant.components import frontend
 
 from tests.common import mock_coro
+
 
 MOCK_ENVIRON = {"HASSIO": "127.0.0.1", "HASSIO_TOKEN": "abcdefgh"}
 

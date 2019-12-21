@@ -1,20 +1,20 @@
 """Test the bootstrapping."""
 # pylint: disable=protected-access
 import asyncio
-import logging
 import os
 from unittest.mock import Mock, patch
+import logging
 
-from homeassistant import bootstrap
 import homeassistant.config as config_util
+from homeassistant import bootstrap
 import homeassistant.util.dt as dt_util
 
 from tests.common import (
-    MockModule,
+    patch_yaml_files,
     get_test_config_dir,
     mock_coro,
     mock_integration,
-    patch_yaml_files,
+    MockModule,
 )
 
 ORIG_TIMEZONE = dt_util.DEFAULT_TIME_ZONE

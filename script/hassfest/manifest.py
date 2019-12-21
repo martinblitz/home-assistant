@@ -6,6 +6,7 @@ from voluptuous.humanize import humanize_error
 
 from .model import Integration
 
+
 MANIFEST_SCHEMA = vol.Schema(
     {
         vol.Required("domain"): str,

@@ -2,8 +2,6 @@
 from datetime import datetime
 import logging
 
-from regenmaschine.errors import RequestError
-
 from homeassistant.components.switch import SwitchDevice
 from homeassistant.const import ATTR_ID
 from homeassistant.core import callback
@@ -183,6 +181,7 @@ class RainMachineProgram(RainMachineSwitch):
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the program off."""
+        from regenmaschine.errors import RequestError
 
         try:
             await self.rainmachine.client.programs.stop(self._rainmachine_entity_id)
@@ -194,6 +193,7 @@ class RainMachineProgram(RainMachineSwitch):
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the program on."""
+        from regenmaschine.errors import RequestError
 
         try:
             await self.rainmachine.client.programs.start(self._rainmachine_entity_id)
@@ -205,6 +205,7 @@ class RainMachineProgram(RainMachineSwitch):
 
     async def async_update(self) -> None:
         """Update info for the program."""
+        from regenmaschine.errors import RequestError
 
         try:
             self._obj = await self.rainmachine.client.programs.get(
@@ -264,6 +265,7 @@ class RainMachineZone(RainMachineSwitch):
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the zone off."""
+        from regenmaschine.errors import RequestError
 
         try:
             await self.rainmachine.client.zones.stop(self._rainmachine_entity_id)
@@ -272,6 +274,7 @@ class RainMachineZone(RainMachineSwitch):
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the zone on."""
+        from regenmaschine.errors import RequestError
 
         try:
             await self.rainmachine.client.zones.start(
@@ -282,6 +285,7 @@ class RainMachineZone(RainMachineSwitch):
 
     async def async_update(self) -> None:
         """Update info for the zone."""
+        from regenmaschine.errors import RequestError
 
         try:
             self._obj = await self.rainmachine.client.zones.get(

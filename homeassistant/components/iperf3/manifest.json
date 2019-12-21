@@ -6,7 +6,5 @@
     "iperf3==0.1.11"
   ],
   "dependencies": [],
-  "codeowners": [
-    "@rohankapoorcom"
-  ]
+  "codeowners": []
 }

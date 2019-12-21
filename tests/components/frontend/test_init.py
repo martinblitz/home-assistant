@@ -5,18 +5,19 @@ from unittest.mock import patch
 
 import pytest
 
+from homeassistant.setup import async_setup_component
 from homeassistant.components.frontend import (
-    CONF_EXTRA_HTML_URL,
-    CONF_EXTRA_HTML_URL_ES5,
+    DOMAIN,
     CONF_JS_VERSION,
     CONF_THEMES,
-    DOMAIN,
+    CONF_EXTRA_HTML_URL,
+    CONF_EXTRA_HTML_URL_ES5,
     EVENT_PANELS_UPDATED,
 )
 from homeassistant.components.websocket_api.const import TYPE_RESULT
-from homeassistant.setup import async_setup_component
 
-from tests.common import async_capture_events, mock_coro
+from tests.common import mock_coro, async_capture_events
+
 
 CONFIG_THEMES = {DOMAIN: {CONF_THEMES: {"happy": {"primary-color": "red"}}}}
 

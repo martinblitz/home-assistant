@@ -3,11 +3,10 @@ import logging
 
 import voluptuous as vol
 
-from homeassistant.components.lock import DOMAIN, LockDevice
 from homeassistant.core import callback
-import homeassistant.helpers.config_validation as cv
+from homeassistant.components.lock import DOMAIN, LockDevice
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
-
+import homeassistant.helpers.config_validation as cv
 from . import ZWaveDeviceEntity, const
 
 _LOGGER = logging.getLogger(__name__)

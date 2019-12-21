@@ -1,12 +1,13 @@
 """Test Home Assistant template helper methods."""
-from datetime import datetime
 import math
 import random
+from datetime import datetime
 from unittest.mock import patch
 
 import pytest
 import pytz
 
+import homeassistant.util.dt as dt_util
 from homeassistant.components import group
 from homeassistant.const import (
     LENGTH_METERS,
@@ -18,7 +19,6 @@ from homeassistant.const import (
 )
 from homeassistant.exceptions import TemplateError
 from homeassistant.helpers import template
-import homeassistant.util.dt as dt_util
 from homeassistant.util.unit_system import UnitSystem
 
 
@@ -225,13 +225,6 @@ def test_rounding_value(hass):
             '{{ states.sensor.temperature.state | round(1, "ceil") }}', hass
         ).async_render()
         == "12.8"
-    )
-
-    assert (
-        template.Template(
-            '{{ states.sensor.temperature.state | round(1, "half") }}', hass
-        ).async_render()
-        == "13.0"
     )
 
 
@@ -1796,10 +1789,3 @@ def test_length_of_states(hass):
 
     tpl = template.Template("{{ states.sensor | length }}", hass)
     assert tpl.async_render() == "2"
-
-
-def test_render_complex_handling_non_template_values(hass):
-    """Test that we can render non-template fields."""
-    assert template.render_complex(
-        {True: 1, False: template.Template("{{ hello }}", hass)}, {"hello": 2}
-    ) == {True: 1, False: "2"}

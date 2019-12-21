@@ -17,6 +17,7 @@ from homeassistant.util.yaml import dump
 
 from .const import KEY_REAL_IP
 
+
 # mypy: allow-untyped-defs, no-check-untyped-defs
 
 _LOGGER = logging.getLogger(__name__)

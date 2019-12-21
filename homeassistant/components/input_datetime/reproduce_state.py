@@ -31,12 +31,18 @@ def is_valid_datetime(string: str) -> bool:
 
 def is_valid_date(string: str) -> bool:
     """Test if string dt is a valid date."""
-    return dt_util.parse_date(string) is not None
+    try:
+        return dt_util.parse_date(string) is not None
+    except ValueError:
+        return False
 
 
 def is_valid_time(string: str) -> bool:
     """Test if string dt is a valid time."""
-    return dt_util.parse_time(string) is not None
+    try:
+        return dt_util.parse_time(string) is not None
+    except ValueError:
+        return False
 
 
 async def _async_reproduce_state(

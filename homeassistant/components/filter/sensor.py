@@ -1,31 +1,31 @@
 """Allows the creation of a sensor that filters state property."""
-from collections import Counter, deque
+import logging
+import statistics
+from collections import deque, Counter
+from numbers import Number
+from functools import partial
 from copy import copy
 from datetime import timedelta
-from functools import partial
-import logging
-from numbers import Number
-import statistics
 from typing import Optional
 
 import voluptuous as vol
 
-from homeassistant.components import history
+from homeassistant.core import callback
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
+    CONF_NAME,
+    CONF_ENTITY_ID,
+    ATTR_UNIT_OF_MEASUREMENT,
     ATTR_ENTITY_ID,
     ATTR_ICON,
-    ATTR_UNIT_OF_MEASUREMENT,
-    CONF_ENTITY_ID,
-    CONF_NAME,
-    STATE_UNAVAILABLE,
     STATE_UNKNOWN,
+    STATE_UNAVAILABLE,
 )
-from homeassistant.core import callback
 import homeassistant.helpers.config_validation as cv
+from homeassistant.util.decorator import Registry
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.event import async_track_state_change
-from homeassistant.util.decorator import Registry
+from homeassistant.components import history
 import homeassistant.util.dt as dt_util
 
 _LOGGER = logging.getLogger(__name__)

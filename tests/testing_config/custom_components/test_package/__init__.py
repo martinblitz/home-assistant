@@ -1,5 +1,6 @@
 """Provide a mock package component."""
-from .const import TEST  # noqa: F401
+from .const import TEST  # noqa
+
 
 DOMAIN = "test_package"
 

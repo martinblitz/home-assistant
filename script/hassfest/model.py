@@ -1,8 +1,8 @@
 """Models for manifest validator."""
-import importlib
 import json
+from typing import List, Dict, Any
 import pathlib
-from typing import Any, Dict, List
+import importlib
 
 import attr
 

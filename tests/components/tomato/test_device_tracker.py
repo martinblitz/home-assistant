@@ -1,6 +1,5 @@
 """The tests for the Tomato device tracker platform."""
 from unittest import mock
-
 import pytest
 import requests
 import requests_mock
@@ -10,11 +9,11 @@ from homeassistant.components.device_tracker import DOMAIN
 import homeassistant.components.tomato.device_tracker as tomato
 from homeassistant.const import (
     CONF_HOST,
+    CONF_USERNAME,
     CONF_PASSWORD,
-    CONF_PLATFORM,
     CONF_PORT,
     CONF_SSL,
-    CONF_USERNAME,
+    CONF_PLATFORM,
     CONF_VERIFY_SSL,
 )
 

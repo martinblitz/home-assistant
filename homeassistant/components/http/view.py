@@ -34,8 +34,8 @@ class HomeAssistantView:
     requires_auth = True
     cors_allowed = False
 
-    @staticmethod
-    def context(request):
+    # pylint: disable=no-self-use
+    def context(self, request):
         """Generate a context from a request."""
         user = request.get("hass_user")
         if user is None:
@@ -43,8 +43,7 @@ class HomeAssistantView:
 
         return Context(user_id=user.id)
 
-    @staticmethod
-    def json(result, status_code=200, headers=None):
+    def json(self, result, status_code=200, headers=None):
         """Return a JSON response."""
         try:
             msg = json.dumps(

@@ -6,19 +6,19 @@ import json
 from aiohttp.hdrs import AUTHORIZATION
 import pytest
 
-from homeassistant import const, core, setup
+from homeassistant import core, const, setup
 from homeassistant.components import (
-    alarm_control_panel,
-    cover,
     fan,
-    google_assistant as ga,
+    cover,
     light,
+    switch,
     lock,
     media_player,
-    switch,
+    alarm_control_panel,
 )
 from homeassistant.components.climate import const as climate
 from homeassistant.const import CLOUD_NEVER_EXPOSED_ENTITIES
+from homeassistant.components import google_assistant as ga
 
 from . import DEMO_DEVICES
 

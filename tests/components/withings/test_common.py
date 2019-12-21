@@ -1,14 +1,15 @@
 """Tests for the Withings component."""
 from asynctest import MagicMock
+
 import pytest
 from withings_api import WithingsApi
-from withings_api.common import TimeoutException, UnauthorizedException
+from withings_api.common import UnauthorizedException, TimeoutException
 
+from homeassistant.exceptions import PlatformNotReady
 from homeassistant.components.withings.common import (
     NotAuthenticatedError,
     WithingsDataManager,
 )
-from homeassistant.exceptions import PlatformNotReady
 
 
 @pytest.fixture(name="withings_api")

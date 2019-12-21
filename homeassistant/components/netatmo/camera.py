@@ -6,20 +6,20 @@ import requests
 import voluptuous as vol
 
 from homeassistant.components.camera import (
-    CAMERA_SERVICE_SCHEMA,
     PLATFORM_SCHEMA,
-    SUPPORT_STREAM,
     Camera,
+    SUPPORT_STREAM,
+    CAMERA_SERVICE_SCHEMA,
 )
-from homeassistant.const import CONF_VERIFY_SSL, STATE_OFF, STATE_ON
+from homeassistant.const import CONF_VERIFY_SSL, STATE_ON, STATE_OFF
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.dispatcher import (
-    async_dispatcher_connect,
     async_dispatcher_send,
+    async_dispatcher_connect,
 )
 
-from . import CameraData
 from .const import DATA_NETATMO_AUTH, DOMAIN
+from . import CameraData
 
 _LOGGER = logging.getLogger(__name__)
 

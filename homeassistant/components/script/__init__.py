@@ -6,22 +6,23 @@ import voluptuous as vol
 
 from homeassistant.const import (
     ATTR_ENTITY_ID,
-    ATTR_NAME,
-    CONF_ALIAS,
-    EVENT_SCRIPT_STARTED,
-    SERVICE_RELOAD,
-    SERVICE_TOGGLE,
     SERVICE_TURN_OFF,
     SERVICE_TURN_ON,
+    SERVICE_TOGGLE,
+    SERVICE_RELOAD,
     STATE_ON,
+    CONF_ALIAS,
+    EVENT_SCRIPT_STARTED,
+    ATTR_NAME,
 )
-import homeassistant.helpers.config_validation as cv
-from homeassistant.helpers.config_validation import make_entity_service_schema
+from homeassistant.loader import bind_hass
 from homeassistant.helpers.entity import ToggleEntity
 from homeassistant.helpers.entity_component import EntityComponent
-from homeassistant.helpers.script import Script
+import homeassistant.helpers.config_validation as cv
+from homeassistant.helpers.config_validation import ENTITY_SERVICE_SCHEMA
 from homeassistant.helpers.service import async_set_service_schema
-from homeassistant.loader import bind_hass
+
+from homeassistant.helpers.script import Script
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -59,7 +60,7 @@ CONFIG_SCHEMA = vol.Schema(
 )
 
 SCRIPT_SERVICE_SCHEMA = vol.Schema(dict)
-SCRIPT_TURN_ONOFF_SCHEMA = make_entity_service_schema(
+SCRIPT_TURN_ONOFF_SCHEMA = ENTITY_SERVICE_SCHEMA.extend(
     {vol.Optional(ATTR_VARIABLES): dict}
 )
 RELOAD_SERVICE_SCHEMA = vol.Schema({})
@@ -206,7 +207,7 @@ class ScriptEntity(ToggleEntity):
         )
         try:
             await self.script.async_run(kwargs.get(ATTR_VARIABLES), context)
-        except Exception as err:
+        except Exception as err:  # pylint: disable=broad-except
             self.script.async_log_exception(
                 _LOGGER, f"Error executing script {self.entity_id}", err
             )

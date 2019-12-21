@@ -1,18 +1,18 @@
 """ruamel.yaml utility functions."""
-from collections import OrderedDict
 import logging
 import os
 from os import O_CREAT, O_TRUNC, O_WRONLY, stat_result
-from typing import Dict, List, Optional, Union
+from collections import OrderedDict
+from typing import Union, List, Dict, Optional
 
 import ruamel.yaml
 from ruamel.yaml import YAML
-from ruamel.yaml.compat import StringIO
 from ruamel.yaml.constructor import SafeConstructor
 from ruamel.yaml.error import YAMLError
+from ruamel.yaml.compat import StringIO
 
-from homeassistant.exceptions import HomeAssistantError
 from homeassistant.util.yaml import secret_yaml
+from homeassistant.exceptions import HomeAssistantError
 
 _LOGGER = logging.getLogger(__name__)
 

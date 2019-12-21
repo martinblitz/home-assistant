@@ -1,18 +1,19 @@
 """Script to check the configuration file."""
 
 import argparse
-from collections import OrderedDict
-from glob import glob
 import logging
 import os
-from typing import Any, Callable, Dict, List, Sequence, Tuple
+from collections import OrderedDict
+from glob import glob
+from typing import Dict, List, Sequence, Any, Tuple, Callable
 from unittest.mock import patch
 
 from homeassistant import bootstrap, core
 from homeassistant.config import get_default_config_dir
-from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.check_config import async_check_ha_config_file
 import homeassistant.util.yaml.loader as yaml_loader
+from homeassistant.exceptions import HomeAssistantError
+
 
 # mypy: allow-untyped-calls, allow-untyped-defs
 

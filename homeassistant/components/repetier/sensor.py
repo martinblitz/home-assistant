@@ -35,10 +35,11 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         printer_id = info["printer_id"]
         sensor_type = info["sensor_type"]
         temp_id = info["temp_id"]
-        name = f"{info['name']}{SENSOR_TYPES[sensor_type][3]}"
+        name = info["name"]
         if temp_id is not None:
-            _LOGGER.debug("%s Temp_id: %s", sensor_type, temp_id)
-            name = f"{name}{temp_id}"
+            name = "{}{}{}".format(name, SENSOR_TYPES[sensor_type][3], temp_id)
+        else:
+            name = "{}{}".format(name, SENSOR_TYPES[sensor_type][3])
         sensor_class = sensor_map[sensor_type]
         entity = sensor_class(api, temp_id, name, printer_id, sensor_type)
         entities.append(entity)

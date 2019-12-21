@@ -7,7 +7,7 @@ from aiohttp import web
 
 from homeassistant.components import http
 from homeassistant.const import STATE_OFF, STATE_ON
-from homeassistant.helpers.config_validation import (  # noqa: F401
+from homeassistant.helpers.config_validation import (  # noqa
     PLATFORM_SCHEMA,
     PLATFORM_SCHEMA_BASE,
     time_period_str,
@@ -16,6 +16,7 @@ from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.entity_component import EntityComponent
 from homeassistant.helpers.template import DATE_STR_FORMAT
 from homeassistant.util import dt
+
 
 # mypy: allow-untyped-defs, no-check-untyped-defs
 

@@ -1,13 +1,13 @@
 """Support Hook, available at hooksmarthome.com."""
-import asyncio
 import logging
+import asyncio
 
-import aiohttp
-import async_timeout
 import voluptuous as vol
+import async_timeout
+import aiohttp
 
-from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchDevice
-from homeassistant.const import CONF_PASSWORD, CONF_TOKEN, CONF_USERNAME
+from homeassistant.components.switch import SwitchDevice, PLATFORM_SCHEMA
+from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, CONF_TOKEN
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 import homeassistant.helpers.config_validation as cv
 

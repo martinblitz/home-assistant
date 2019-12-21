@@ -5,8 +5,9 @@ import json
 import logging
 import os
 
-import aioautomatic
 from aiohttp import web
+import aioautomatic
+
 import voluptuous as vol
 
 from homeassistant.components.device_tracker import (

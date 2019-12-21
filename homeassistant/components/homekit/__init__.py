@@ -29,7 +29,6 @@ from homeassistant.helpers.entityfilter import FILTER_SCHEMA
 from homeassistant.util import get_local_ip
 from homeassistant.util.decorator import Registry
 
-from .accessories import HomeBridge, HomeDriver
 from .const import (
     BRIDGE_NAME,
     CONF_ADVERTISE_IP,
@@ -46,8 +45,8 @@ from .const import (
     DEVICE_CLASS_PM25,
     DOMAIN,
     HOMEKIT_FILE,
-    SERVICE_HOMEKIT_RESET_ACCESSORY,
     SERVICE_HOMEKIT_START,
+    SERVICE_HOMEKIT_RESET_ACCESSORY,
     TYPE_FAUCET,
     TYPE_OUTLET,
     TYPE_SHOWER,
@@ -55,6 +54,7 @@ from .const import (
     TYPE_SWITCH,
     TYPE_VALVE,
 )
+
 from .util import (
     show_setup_message,
     validate_entity_config,
@@ -303,6 +303,7 @@ class HomeKit:
 
     def setup(self):
         """Set up bridge and accessory driver."""
+        from .accessories import HomeBridge, HomeDriver
 
         self.hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, self.stop)
 
@@ -361,7 +362,8 @@ class HomeKit:
             return
         self.status = STATUS_WAIT
 
-        from . import (  # noqa: F401 pylint: disable=unused-import, import-outside-toplevel
+        # pylint: disable=unused-import
+        from . import (  # noqa F401
             type_covers,
             type_fans,
             type_lights,

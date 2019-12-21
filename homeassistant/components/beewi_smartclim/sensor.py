@@ -5,15 +5,15 @@ from beewi_smartclim import BeewiSmartClimPoller
 import voluptuous as vol
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA
+import homeassistant.helpers.config_validation as cv
 from homeassistant.const import (
-    CONF_MAC,
     CONF_NAME,
-    DEVICE_CLASS_BATTERY,
+    CONF_MAC,
+    TEMP_CELSIUS,
     DEVICE_CLASS_HUMIDITY,
     DEVICE_CLASS_TEMPERATURE,
-    TEMP_CELSIUS,
+    DEVICE_CLASS_BATTERY,
 )
-import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 
 _LOGGER = logging.getLogger(__name__)

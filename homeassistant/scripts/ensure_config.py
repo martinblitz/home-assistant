@@ -2,8 +2,9 @@
 import argparse
 import os
 
-import homeassistant.config as config_util
 from homeassistant.core import HomeAssistant
+import homeassistant.config as config_util
+
 
 # mypy: allow-untyped-calls, allow-untyped-defs
 

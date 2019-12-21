@@ -1,12 +1,15 @@
 """Support for the YesssSMS platform."""
 import logging
 
-from YesssSMS import YesssSMS
 import voluptuous as vol
 
-from homeassistant.components.notify import PLATFORM_SCHEMA, BaseNotificationService
+from YesssSMS import YesssSMS
+
 from homeassistant.const import CONF_PASSWORD, CONF_RECIPIENT, CONF_USERNAME
 import homeassistant.helpers.config_validation as cv
+
+from homeassistant.components.notify import PLATFORM_SCHEMA, BaseNotificationService
+
 
 from .const import CONF_PROVIDER
 

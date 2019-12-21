@@ -1,7 +1,6 @@
 """Interfaces with Egardia/Woonveilig alarm control panel."""
 import logging
 
-from pythonegardia import egardiadevice, egardiaserver
 import requests
 import voluptuous as vol
 
@@ -79,6 +78,8 @@ CONFIG_SCHEMA = vol.Schema(
 
 def setup(hass, config):
     """Set up the Egardia platform."""
+    from pythonegardia import egardiadevice
+    from pythonegardia import egardiaserver
 
     conf = config[DOMAIN]
     username = conf.get(CONF_USERNAME)

@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 from homeassistant.components import axis
 from homeassistant.components.axis import config_flow
 
-from tests.common import MockConfigEntry, mock_coro
+from tests.common import mock_coro, MockConfigEntry
 
 
 async def test_configured_devices(hass):

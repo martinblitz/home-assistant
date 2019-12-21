@@ -1,16 +1,15 @@
 """Support for LG WebOS TV notification service."""
 import logging
 
-from pylgtv import PyLGTVPairException, WebOsClient
 import voluptuous as vol
 
+import homeassistant.helpers.config_validation as cv
 from homeassistant.components.notify import (
     ATTR_DATA,
-    PLATFORM_SCHEMA,
     BaseNotificationService,
+    PLATFORM_SCHEMA,
 )
 from homeassistant.const import CONF_FILENAME, CONF_HOST, CONF_ICON
-import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,6 +26,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
 def get_service(hass, config, discovery_info=None):
     """Return the notify service."""
+    from pylgtv import WebOsClient
+    from pylgtv import PyLGTVPairException
 
     path = hass.config.path(config.get(CONF_FILENAME))
     client = WebOsClient(config.get(CONF_HOST), key_file_path=path, timeout_connect=8)
@@ -54,6 +55,7 @@ class LgWebOSNotificationService(BaseNotificationService):
 
     def send_message(self, message="", **kwargs):
         """Send a message to the tv."""
+        from pylgtv import PyLGTVPairException
 
         try:
             data = kwargs.get(ATTR_DATA)

@@ -7,12 +7,11 @@ import pytest
 import voluptuous as vol
 
 from homeassistant import auth, data_entry_flow
-from homeassistant.auth import auth_store, const as auth_const, models as auth_models
+from homeassistant.auth import models as auth_models, auth_store, const as auth_const
 from homeassistant.auth.const import MFA_SESSION_EXPIRATION
 from homeassistant.core import callback
 from homeassistant.util import dt as dt_util
-
-from tests.common import CLIENT_ID, MockUser, ensure_auth_manager_loaded, flush_store
+from tests.common import MockUser, ensure_auth_manager_loaded, flush_store, CLIENT_ID
 
 
 @pytest.fixture

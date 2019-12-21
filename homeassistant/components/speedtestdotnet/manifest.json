@@ -6,7 +6,5 @@
     "speedtest-cli==2.1.2"
   ],
   "dependencies": [],
-  "codeowners": [
-    "@rohankapoorcom"
-  ]
+  "codeowners": []
 }

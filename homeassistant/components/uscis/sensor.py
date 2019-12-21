@@ -1,15 +1,16 @@
 """Support for USCIS Case Status."""
-from datetime import timedelta
 import logging
+from datetime import timedelta
 
 import uscisstatus
 import voluptuous as vol
 
-from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.const import CONF_FRIENDLY_NAME
-from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
+from homeassistant.components.sensor import PLATFORM_SCHEMA
+from homeassistant.helpers import config_validation as cv
+from homeassistant.const import CONF_FRIENDLY_NAME
+
 
 _LOGGER = logging.getLogger(__name__)
 

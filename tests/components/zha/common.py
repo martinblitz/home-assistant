@@ -93,8 +93,6 @@ class FakeDevice:
         self.manufacturer = manufacturer
         self.model = model
         self.node_desc = zigpy.zdo.types.NodeDescriptor()
-        self.add_to_group = CoroutineMock()
-        self.remove_from_group = CoroutineMock()
 
 
 def make_device(

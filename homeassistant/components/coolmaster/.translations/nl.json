@@ -5,9 +5,6 @@
         },
         "step": {
             "user": {
-                "data": {
-                    "off": "Kan uitgeschakeld worden"
-                },
                 "title": "Stel uw CoolMasterNet-verbindingsgegevens in."
             }
         },

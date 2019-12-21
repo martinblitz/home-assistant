@@ -1,32 +1,32 @@
 """Test the helper method for writing tests."""
 import asyncio
 import collections
-from collections import OrderedDict
-from contextlib import contextmanager
-from datetime import timedelta
 import functools as ft
-from io import StringIO
 import json
 import logging
 import os
+import uuid
 import sys
 import threading
+
+from collections import OrderedDict
+from contextlib import contextmanager
+from datetime import timedelta
+from io import StringIO
 from unittest.mock import MagicMock, Mock, patch
-import uuid
+
+import homeassistant.util.dt as date_util
+import homeassistant.util.yaml.loader as yaml_loader
 
 from homeassistant import auth, config_entries, core as ha, loader
 from homeassistant.auth import (
-    auth_store,
     models as auth_models,
-    permissions as auth_permissions,
+    auth_store,
     providers as auth_providers,
+    permissions as auth_permissions,
 )
 from homeassistant.auth.permissions import system_policies
 from homeassistant.components import mqtt, recorder
-from homeassistant.components.device_automation import (  # noqa: F401
-    _async_get_device_automation_capabilities as async_get_device_automation_capabilities,
-    _async_get_device_automations as async_get_device_automations,
-)
 from homeassistant.components.mqtt.models import Message
 from homeassistant.config import async_process_component_config
 from homeassistant.const import (
@@ -38,8 +38,8 @@ from homeassistant.const import (
     EVENT_STATE_CHANGED,
     EVENT_TIME_CHANGED,
     SERVER_PORT,
-    STATE_OFF,
     STATE_ON,
+    STATE_OFF,
 )
 from homeassistant.core import State
 from homeassistant.helpers import (
@@ -54,10 +54,12 @@ from homeassistant.helpers import (
 )
 from homeassistant.helpers.json import JSONEncoder
 from homeassistant.setup import async_setup_component, setup_component
-from homeassistant.util.async_ import run_callback_threadsafe
-import homeassistant.util.dt as date_util
 from homeassistant.util.unit_system import METRIC_SYSTEM
-import homeassistant.util.yaml.loader as yaml_loader
+from homeassistant.util.async_ import run_callback_threadsafe
+from homeassistant.components.device_automation import (  # noqa
+    _async_get_device_automations as async_get_device_automations,
+    _async_get_device_automation_capabilities as async_get_device_automation_capabilities,
+)
 
 _TEST_INSTANCE_PORT = SERVER_PORT
 _LOGGER = logging.getLogger(__name__)
@@ -671,7 +673,6 @@ class MockConfigEntry(config_entries.ConfigEntry):
         options={},
         system_options={},
         connection_class=config_entries.CONN_CLASS_UNKNOWN,
-        unique_id=None,
     ):
         """Initialize a mock config entry."""
         kwargs = {
@@ -683,7 +684,6 @@ class MockConfigEntry(config_entries.ConfigEntry):
             "version": version,
             "title": title,
             "connection_class": connection_class,
-            "unique_id": unique_id,
         }
         if source is not None:
             kwargs["source"] = source
@@ -1084,7 +1084,7 @@ class hashdict(dict):
 
     """
 
-    def __key(self):
+    def __key(self):  # noqa: D105 no docstring
         return tuple(sorted(self.items()))
 
     def __repr__(self):  # noqa: D105 no docstring

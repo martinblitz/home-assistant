@@ -1,6 +1,7 @@
 """The tests for the MQTT discovery."""
 from pathlib import Path
 import re
+
 from unittest.mock import patch
 
 from homeassistant.components import mqtt

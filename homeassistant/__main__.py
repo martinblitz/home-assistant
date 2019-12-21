@@ -1,22 +1,25 @@
 """Start Home Assistant."""
 import argparse
-import asyncio
 import os
 import platform
 import subprocess
 import sys
 import threading
-from typing import TYPE_CHECKING, Any, Dict, List
+from typing import List, Dict, Any, TYPE_CHECKING
 
-from homeassistant.const import REQUIRED_PYTHON_VER, RESTART_EXIT_CODE, __version__
+from homeassistant import monkey_patch
+from homeassistant.const import __version__, REQUIRED_PYTHON_VER, RESTART_EXIT_CODE
 
 if TYPE_CHECKING:
     from homeassistant import core
 
 
 def set_loop() -> None:
-    """Attempt to use different loop."""
+    """Attempt to use uvloop."""
+    import asyncio
     from asyncio.events import BaseDefaultEventLoopPolicy
+
+    policy = None
 
     if sys.platform == "win32":
         if hasattr(asyncio, "WindowsProactorEventLoopPolicy"):
@@ -30,7 +33,15 @@ def set_loop() -> None:
                 _loop_factory = asyncio.ProactorEventLoop
 
             policy = ProactorPolicy()
+    else:
+        try:
+            import uvloop
+        except ImportError:
+            pass
+        else:
+            policy = uvloop.EventLoopPolicy()
 
+    if policy is not None:
         asyncio.set_event_loop_policy(policy)
 
 
@@ -261,6 +272,7 @@ def cmdline() -> List[str]:
 
 async def setup_and_run_hass(config_dir: str, args: argparse.Namespace) -> int:
     """Set up HASS and run."""
+    # pylint: disable=redefined-outer-name
     from homeassistant import bootstrap, core
 
     hass = core.HomeAssistant()
@@ -344,6 +356,11 @@ def main() -> int:
     """Start Home Assistant."""
     validate_python()
 
+    monkey_patch_needed = sys.version_info[:3] < (3, 6, 3)
+    if monkey_patch_needed and os.environ.get("HASS_NO_MONKEY") != "1":
+        monkey_patch.disable_c_asyncio()
+        monkey_patch.patch_weakref_tasks()
+
     set_loop()
 
     # Run a simple daemon runner process on Windows to handle restarts
@@ -377,11 +394,13 @@ def main() -> int:
     if args.pid_file:
         write_pid(args.pid_file)
 
-    exit_code = asyncio.run(setup_and_run_hass(config_dir, args))
+    from homeassistant.util.async_ import asyncio_run
+
+    exit_code = asyncio_run(setup_and_run_hass(config_dir, args))
     if exit_code == RESTART_EXIT_CODE and not args.runner:
         try_to_restart()
 
-    return exit_code
+    return exit_code  # type: ignore
 
 
 if __name__ == "__main__":

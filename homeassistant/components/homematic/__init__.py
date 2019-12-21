@@ -1,9 +1,8 @@
 """Support for HomeMatic devices."""
-from datetime import datetime, timedelta
+from datetime import timedelta, datetime
 from functools import partial
 import logging
 
-from pyhomematic import HMConnection
 import voluptuous as vol
 
 from homeassistant.const import (
@@ -367,6 +366,7 @@ SCHEMA_SERVICE_PUT_PARAMSET = vol.Schema(
 
 def setup(hass, config):
     """Set up the Homematic component."""
+    from pyhomematic import HMConnection
 
     conf = config[DOMAIN]
     hass.data[DATA_CONF] = remotes = {}

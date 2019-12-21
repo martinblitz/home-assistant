@@ -1,15 +1,13 @@
 """The tests for the Ring sensor platform."""
 import os
 import unittest
-
 import requests_mock
 
-from homeassistant.components import ring as base_ring
 import homeassistant.components.ring.sensor as ring
+from homeassistant.components import ring as base_ring
 from homeassistant.helpers.icon import icon_for_battery_level
-
-from tests.common import get_test_config_dir, get_test_home_assistant, load_fixture
 from tests.components.ring.test_init import ATTRIBUTION, VALID_CONFIG
+from tests.common import get_test_config_dir, get_test_home_assistant, load_fixture
 
 
 class TestRingSensorSetup(unittest.TestCase):

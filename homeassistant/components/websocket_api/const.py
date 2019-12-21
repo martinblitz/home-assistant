@@ -3,7 +3,6 @@ import asyncio
 from concurrent import futures
 from functools import partial
 import json
-
 from homeassistant.helpers.json import JSONEncoder
 
 DOMAIN = "websocket_api"

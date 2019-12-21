@@ -4,12 +4,13 @@ import logging
 from typing import Optional
 
 from homeassistant.const import ATTR_LATITUDE, ATTR_LONGITUDE
-from homeassistant.helpers.config_validation import (  # noqa: F401
+from homeassistant.helpers.config_validation import (  # noqa
     PLATFORM_SCHEMA,
     PLATFORM_SCHEMA_BASE,
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.entity_component import EntityComponent
+
 
 # mypy: allow-untyped-defs, no-check-untyped-defs
 

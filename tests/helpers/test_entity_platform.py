@@ -1,29 +1,30 @@
 """Tests for the EntityPlatform helper."""
 import asyncio
-from datetime import timedelta
 import logging
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import patch, Mock, MagicMock
+from datetime import timedelta
 
 import asynctest
 import pytest
 
 from homeassistant.exceptions import PlatformNotReady
-from homeassistant.helpers import entity_platform, entity_registry
 from homeassistant.helpers.entity import async_generate_entity_id
 from homeassistant.helpers.entity_component import (
-    DEFAULT_SCAN_INTERVAL,
     EntityComponent,
+    DEFAULT_SCAN_INTERVAL,
 )
+from homeassistant.helpers import entity_platform, entity_registry
+
 import homeassistant.util.dt as dt_util
 
 from tests.common import (
-    MockConfigEntry,
-    MockEntity,
-    MockEntityPlatform,
     MockPlatform,
     async_fire_time_changed,
-    mock_entity_platform,
     mock_registry,
+    MockEntity,
+    MockEntityPlatform,
+    MockConfigEntry,
+    mock_entity_platform,
 )
 
 _LOGGER = logging.getLogger(__name__)

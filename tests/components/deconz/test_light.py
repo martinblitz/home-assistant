@@ -4,10 +4,11 @@ from copy import deepcopy
 from asynctest import patch
 
 from homeassistant.components import deconz
-import homeassistant.components.light as light
 from homeassistant.setup import async_setup_component
 
-from .test_gateway import DECONZ_WEB_REQUEST, ENTRY_CONFIG, setup_deconz_integration
+import homeassistant.components.light as light
+
+from .test_gateway import ENTRY_CONFIG, DECONZ_WEB_REQUEST, setup_deconz_integration
 
 GROUPS = {
     "1": {
@@ -116,22 +117,17 @@ async def test_lights_and_groups(hass):
     empty_group = hass.states.get("light.empty_group")
     assert empty_group is None
 
-    state_changed_event = {
-        "t": "event",
-        "e": "changed",
-        "r": "lights",
-        "id": "1",
-        "state": {"on": False},
-    }
-    gateway.api.async_event_handler(state_changed_event)
+    rgb_light_device = gateway.api.lights["1"]
+
+    rgb_light_device.async_update({"state": {"on": False}})
     await hass.async_block_till_done()
 
     rgb_light = hass.states.get("light.rgb_light")
     assert rgb_light.state == "off"
 
-    rgb_light_device = gateway.api.lights["1"]
-
-    with patch.object(rgb_light_device, "_request", return_value=True) as set_callback:
+    with patch.object(
+        rgb_light_device, "_async_set_callback", return_value=True
+    ) as set_callback:
         await hass.services.async_call(
             light.DOMAIN,
             light.SERVICE_TURN_ON,
@@ -147,9 +143,8 @@ async def test_lights_and_groups(hass):
         )
         await hass.async_block_till_done()
         set_callback.assert_called_with(
-            "put",
             "/lights/1/state",
-            json={
+            {
                 "ct": 2500,
                 "bri": 200,
                 "transitiontime": 50,
@@ -158,7 +153,9 @@ async def test_lights_and_groups(hass):
             },
         )
 
-    with patch.object(rgb_light_device, "_request", return_value=True) as set_callback:
+    with patch.object(
+        rgb_light_device, "_async_set_callback", return_value=True
+    ) as set_callback:
         await hass.services.async_call(
             light.DOMAIN,
             light.SERVICE_TURN_ON,
@@ -172,12 +169,13 @@ async def test_lights_and_groups(hass):
         )
         await hass.async_block_till_done()
         set_callback.assert_called_with(
-            "put",
             "/lights/1/state",
-            json={"xy": (0.411, 0.351), "alert": "lselect", "effect": "none"},
+            {"xy": (0.411, 0.351), "alert": "lselect", "effect": "none"},
         )
 
-    with patch.object(rgb_light_device, "_request", return_value=True) as set_callback:
+    with patch.object(
+        rgb_light_device, "_async_set_callback", return_value=True
+    ) as set_callback:
         await hass.services.async_call(
             light.DOMAIN,
             light.SERVICE_TURN_OFF,
@@ -186,12 +184,12 @@ async def test_lights_and_groups(hass):
         )
         await hass.async_block_till_done()
         set_callback.assert_called_with(
-            "put",
-            "/lights/1/state",
-            json={"bri": 0, "transitiontime": 50, "alert": "select"},
+            "/lights/1/state", {"bri": 0, "transitiontime": 50, "alert": "select"}
         )
 
-    with patch.object(rgb_light_device, "_request", return_value=True) as set_callback:
+    with patch.object(
+        rgb_light_device, "_async_set_callback", return_value=True
+    ) as set_callback:
         await hass.services.async_call(
             light.DOMAIN,
             light.SERVICE_TURN_OFF,
@@ -199,9 +197,7 @@ async def test_lights_and_groups(hass):
             blocking=True,
         )
         await hass.async_block_till_done()
-        set_callback.assert_called_with(
-            "put", "/lights/1/state", json={"alert": "lselect"}
-        )
+        set_callback.assert_called_with("/lights/1/state", {"alert": "lselect"})
 
     await gateway.async_reset()
 

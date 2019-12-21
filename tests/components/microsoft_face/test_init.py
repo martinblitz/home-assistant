@@ -19,10 +19,10 @@ from homeassistant.const import ATTR_NAME
 from homeassistant.setup import setup_component
 
 from tests.common import (
-    assert_setup_component,
     get_test_home_assistant,
-    load_fixture,
+    assert_setup_component,
     mock_coro,
+    load_fixture,
 )
 
 

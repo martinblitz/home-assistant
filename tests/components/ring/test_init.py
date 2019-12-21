@@ -1,11 +1,9 @@
 """The tests for the Ring component."""
 from copy import deepcopy
-from datetime import timedelta
 import os
 import unittest
-
 import requests_mock
-
+from datetime import timedelta
 from homeassistant import setup
 import homeassistant.components.ring as ring
 
